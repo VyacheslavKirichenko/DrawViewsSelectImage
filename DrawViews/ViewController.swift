@@ -38,7 +38,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func btnSetImage(_ sender: Any) {
         
-      tapToImageView()
+      tapSelectImage()
     }
     @IBAction func flipView(_ sender: UITapGestureRecognizer) {
        
@@ -76,8 +76,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    @objc func tapToImageView() {
-        print("tap to imageView")
+    @objc func tapSelectImage() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.allowsEditing = true
