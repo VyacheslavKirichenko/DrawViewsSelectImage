@@ -24,7 +24,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     var pushBehaviors: [UIPushBehavior]=[]
     var flagIsFlip:Bool = false
-    var imageView = UIImageView(image: UIImage(named: "cardBack")) //
+    var imageView = UIImageView(image: UIImage(named: "cardBack")) // defaultImage
     
     private lazy var animator = UIDynamicAnimator(referenceView: view)
     private lazy var viewBehavior = ViewBehavior(in: animator)
@@ -33,19 +33,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in 0...viewCollection.count-1{
-            self.view.addSubview(viewCollection[i])
-        }
-        for cardView in viewCollection {
-            cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipView(_:))))
-            viewBehavior.addItem(cardView)
-        }
+       initCollectionViews()
     }
     
     @IBAction func btnSetImage(_ sender: Any) {
         
       tapToImageView()
-        
     }
     @IBAction func flipView(_ sender: UITapGestureRecognizer) {
        
@@ -72,6 +65,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 sender.view!.viewAnimationToMin(completion: nil)
                 viewBehavior.addItem(sender.view!)
             }
+    }
+    func initCollectionViews()  {
+        for i in 0...viewCollection.count-1{
+            self.view.addSubview(viewCollection[i])
+        }
+        for cardView in viewCollection {
+            cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipView(_:))))
+            viewBehavior.addItem(cardView)
+        }
     }
     
     @objc func tapToImageView() {
